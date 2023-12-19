@@ -1,0 +1,59 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LOGIN</title>
+<head>
+    <style>
+        body {
+            height: 100vh;
+            background-image: url("https://img.freepik.com/premium-vector/business-people_48369-4165.jpg?w=1060");
+            padding: 25px;
+            background-position: center;
+            background-size: cover;
+            background-position: fixed;
+            background-repeat: no-repeat;
+        }
+    </style>
+<style>
+    .error-message {
+        color: red;
+    }
+
+    .mandatory-star {
+        color: red;
+        margin-left: 5px;
+    }
+</style>
+</head>
+<body>
+
+    <form method="post" onsubmit="return validateForm()" style="align-content:center">
+       
+        <div class="container" style="width:400px">
+            <center><b style="font-size:30px">LOGIN</b></center>
+            <br />
+            <div class="form-check">
+                <label>Email:<span class="mandatory-star">*</span></label>
+                <input type="text" name="Email" class="form-control" required />
+            </div>
+            <div class="form-check">
+                <label>Password:<span class="mandatory-star">*</span></label>
+                <input type="text" name="Password" class="form-control" required />
+            </div>
+        </div>
+        <div id="error-message" class="error-message" class="align-content-center">
+            <br />
+<center>
+                <button type="submit">Submit</button>
+</center>
+       
+        </div>
+    </form>
+</body>
+</html>

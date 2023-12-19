@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EVOKETASK</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EVOKETASK.styles.css" asp-append-version="true" />
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm9blGGtP2Rn2J9EFH1R0hjzb" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-JYiFJO5+1nUdDz2KtpijFqzDlD/V5Hn7v+fh-9+FQCdTRUnpNbSjAgG7qz1QooEL" crossorigin="anonymous"></script>
+
+
+    <meta name="viewport" content="width=500px, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm bg-light" style="font-size:15px">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EVOKETASK</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <span style="flex:1;"></span>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="RegisterView">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                        </li>
+                        
+                       
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
+                                Evoke
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size:15px">
+                                <a class="dropdown-item" href="/Home/EmpDetails">EmpDetails</a>
+                                <a class="dropdown-item" href="/Home/CreateEmployee">CreateEmployee</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/Home/AboutUs">AboutUs</a>
+                                <a class="dropdown-item" href="/Home/Contact">Contact</a>
+                            </div>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="border-top footer text-muted" style="font-size: 12px; line-height:2;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div>&copy; 2023 - EVOKETASK</div>
+                    <div><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></div>
+                    <div><a asp-area="" asp-controller="Home" asp-action="EmpDetails">EmpDetails</a></div>
+                </div>
+                <div class="col-md-6">
+                    <div><a asp-area="" asp-controller="Home" asp-action="CreateEmployee">CreateEmployee</a></div>
+                    <div><a asp-area="" asp-controller="Home" asp-action="AboutUs">AboutUs</a></div>
+                    <div><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha384-oIqVu2V9kg2vV1qj4b8qGnhnJKfOIY8z9n9dMj2Xxh+db/nv8voqI8+d5M" crossorigin="anonymous"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

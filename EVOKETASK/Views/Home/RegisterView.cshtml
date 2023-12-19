@@ -1,0 +1,236 @@
+﻿@model EVOKETASK.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+ <style>
+        .field-validation-error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+            display: block;
+        }
+    </style>
+   <style>
+        body {
+            height: 100vh;
+            background-image: url("https://img.freepik.com/free-vector/modern-banner-with-abstract-low-poly-design_1048-14340.jpg?size=626&ext=jpg&ga=GA1.1.1293820546.1692708557&semt=ais");
+            padding: 25px;
+            background-position: center;
+            background-size: cover;
+            background-position: fixed;
+            background-repeat: no-repeat;
+        }
+    </style>
+<script>
+    function validateForm() {
+        var fname = document.getElementById("FirstName").value;
+        var lname = document.getElementById("LastName").value;
+        var email = document.getElementById("Email").value;
+        var phoneNumber = document.getElementById("PhoneNumber").value;
+        var password = document.getElementById("Password").value;
+        var cpassword = document.getElementById("ConfirmPassword").value;
+
+        // Reset all error messages
+        document.getElementById("fnameError").innerHTML = "";
+        document.getElementById("lnameError").innerHTML = "";
+        document.getElementById("emailError").innerHTML = "";
+        document.getElementById("phoneError").innerHTML = "";
+        document.getElementById("passError").innerHTML = "";
+        document.getElementById("cError").innerHTML = "";
+
+       
+        var errors = [];
+
+        if (fname.trim() === "") {
+            errors.push("Please enter a first name");
+            document.getElementById("fnameError").innerHTML = "Please enter a first name";
+        }
+
+        if (lname.trim() === "") {
+            errors.push("Please enter a last name");
+            document.getElementById("lnameError").innerHTML = "Please enter a last name";
+        }
+
+        if (email.trim() === "") {
+            errors.push("Please enter an email");
+            document.getElementById("emailError").innerHTML = "Please enter an email";
+        } else {
+            var emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+            if (!emailRegex.test(email)) {
+                errors.push("Invalid email format");
+                document.getElementById("emailError").innerHTML = "Invalid email format";
+            }
+        }
+
+        if (phoneNumber.trim() === "") {
+            errors.push("Please enter a phone number");
+            document.getElementById("phoneError").innerHTML = "Please enter a phone number";
+        } else {
+            var phoneRegex = /^\d{10}$/;
+            if (!phoneRegex.test(phoneNumber)) {
+                errors.push("Invalid phone number format");
+                document.getElementById("phoneError").innerHTML = "Invalid phone number format";
+            }
+        }
+
+        
+        if (password.trim() === "") {
+            errors.push("Please enter a password");
+            document.getElementById("passError").innerHTML = "Please enter a password";
+        } else if (!isStrongPassword(password)) {
+            errors.push("Password should contain at least 8 characters, 1 uppercase, 1 special character, and 1 numerical");
+            document.getElementById("passError").innerHTML = "Password should contain at least 8 characters, 1 uppercase, 1 special character, and 1 numerical";
+        }
+
+       
+        if (cpassword.trim() === "") {
+            errors.push("Please confirm your password");
+            document.getElementById("cError").innerHTML = "Please confirm your password";
+        } else if (password !== cpassword) {
+            errors.push("Passwords do not match");
+            document.getElementById("cError").innerHTML = "Passwords do not match";
+        }
+
+        // Display all validation errors
+        for (var i = 0; i < errors.length; i++) {
+            // Display error messages as needed
+        }
+
+        // Return false if there are validation errors
+        return errors.length === 0;
+    }
+
+    function isStrongPassword(password) {
+        // Password should contain at least 8 characters, 1 uppercase, 1 special character, and 1 numerical
+        var passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@@$!%*?&])[A-Za-z\d@@$!%*?&]{8,}$/;
+        return passwordRegex.test(password);
+    }
+</script>
+<script>
+
+    function populateStates() {
+        var countrySelect = document.getElementById("country");
+        var stateSelect = document.getElementById("state");
+
+        stateSelect.innerHTML = "";
+
+        var selectedCountry = countrySelect.value;
+
+        var states = [];
+
+        if (selectedCountry === "India") {
+            states = ["Maharashtra", "Karnataka", "Tamil Nadu", "Delhi", "Kerala"];
+        } else if (selectedCountry === "America") {
+            states = ["California", "New York", "Texas", "Florida", "Illinois"];
+        }
+        for (var i = 0; i < states.length; i++) {
+            var option = document.createElement("option");
+            option.text = states[i];
+            stateSelect.add(option);
+        }
+        return false;
+    }
+</script>
+
+
+
+<div class="container">
+     <div class="row justify-content-center">
+        <div class="col-md-6">
+            @*<center>
+                <h1>REGISTER</h1>
+            </center>*@
+        <form asp-controller="Home" asp-action="RegisterView" method="post" style="align-content:center" onsubmit="return validateForm();">
+    <table style="width:400px" align="center">
+        <tr>
+            <th><label>FirstName:</label></th>
+            <td>
+                <input type="text" name="FirstName" id="FirstName" class="form-control" />
+                <span id="fnameError" class="field-validation-error"></span>
+           </td>
+        </tr>
+        <tr>
+            <th><label>LastName:</label></th>
+            <td>
+                    <input type="text" name="LastName" id="LastName" class="form-control" />
+                <span id="lnameError" class="field-validation-error"></span>
+                 @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "field-validation-error" })
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                <label>Email:</label>
+            </th>
+            <td>
+                    <input type="text" name="Email" id="Email" class="form-control"  />
+                <span id="emailError" class="field-validation-error"></span>
+                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "field-validation-error" })
+        <tr>
+            <th><label>PhoneNumber:</label></th>
+            <td>
+                    <input type="tel" name="PhoneNumber" id="PhoneNumber" class="form-control"  />
+                <span id="phoneError" class="field-validation-error"></span>
+                 @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "field-validation-error" })
+            </td>
+        </tr>
+        <tr>
+            <th><label>Password:</label></th>
+            <td>
+                    <input type="tel" name="Password" id="Password" class="form-control"  />
+                <span id="passError" class="field-validation-error"></span>
+                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "field-validation-error" })
+            </td>
+        </tr>
+        <tr>
+            <th><label>ConfirmPassword:</label></th>
+            <td>
+                    <input type="tel" name="ConfirmPassword" id="ConfirmPassword" class="form-control"  />
+                <span id="cError" class="field-validation-error"></span>
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "field-validation-error" })
+            </td>
+        </tr>
+        <tr>
+            <th><label for="country">Select Country:</label></th>
+            <td>
+                    <select id="country" name="country" onchange="populateStates()" >
+                    <option value="India">India</option>
+                    <option value="America">America</option>
+                     @Html.ValidationMessageFor(model => model.Country, "", new { @class = "field-validation-error" })
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th> <label for="state">Select State:</label></th>
+            <td>
+                <select id="state" name="state"></select required>
+                @Html.ValidationMessageFor(model => model.State, "", new { @class = "field-validation-error" })
+            </td>
+        </tr>
+
+
+       <tr>
+            <td colspan="2">
+                <center>
+                    <input type="submit" value="Register" />
+                </center>
+            </td>
+            </tr>
+           @* <p>Already have an account login here   <input type="submit" value="Login"/></p>
+            <tr>
+            <td>
+               
+            </td>
+        </tr>*@
+        
+    </table>
+    </form>
+    </div>
+    </div>
+    </div>
+
+
+
+            

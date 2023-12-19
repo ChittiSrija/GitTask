@@ -1,0 +1,122 @@
+﻿@model EVOKETASK.Models.Employee
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2>Create Employee</h2>
+
+            <form method="post" onsubmit="return validateForm()">
+                <table>
+                    <tr>
+                        <th><label>NAME:</label></th>
+                        <td>
+                            <input type="text" name="NAME" id="NAME" class="form-control" />
+                            <span id="nameError" class="field-validation-error"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label>EMAIL:</label></th>
+                        <td>
+                            <input type="text" name="EMAIL" id="EMAIL" class="form-control" />
+                            <span id="emailError" class="field-validation-error"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label>PHONENUMBER:</label></th>
+                        <td>
+                            <input type="text" name="PHONENUMBER" id="PHONENUMBER" class="form-control" />
+                            <span id="phoneError" class="field-validation-error"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label asp-for="DEPTNAME"></label>
+                        </th>
+                        <td>
+                            <input type="text" name="DEPTNAME" id="DEPTNAME" class="form-control" />
+                            <span id="deptError" class="field-validation-error"></span>
+                    <tr>
+                        <th><label>GNAME:</label></th>
+                        <td>
+                            <label><input type="radio" name="GNAME" id="Male" value="1"> Male</label>
+                            <label><input type="radio" name="GNAME" id="Female" value="2"> Female</label>
+                            <label><input type="radio" name="GNAME" id="Other" value="3"> Other</label>
+                            <span id="genderError" class="field-validation-error"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><button type="submit" class="btn btn-danger">Create</button></th>
+                        <th><a asp-action="Index" class="btn btn-default">Cancel</a></th>
+                    </tr>
+                    <tr>
+                        <th><a asp-action="EmpDetails">Back to List</a></th>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .field-validation-error {
+        color: red;
+        font-size: 12px;
+        margin-top: 5px;
+        display: block;
+    }
+</style>
+
+<script>
+    function validateForm() {
+        var name = document.getElementById("NAME").value;
+       // var email = document.getElementById("EMAIL").value;
+        var phoneNumber = document.getElementById("PHONENUMBER").value;
+        var deptName = document.getElementById("DEPTNAME").value;
+        var gender = document.querySelector('input[name="GNAME"]:checked');
+
+        // Reset all error messages
+        document.getElementById("nameError").innerHTML = "";
+       // document.getElementById("emailError").innerHTML = "";
+        document.getElementById("phoneError").innerHTML = "";
+        document.getElementById("deptError").innerHTML = "";
+        document.getElementById("genderError").innerHTML = "";
+
+        // Validate name
+        if (name.trim() === "") {
+            document.getElementById("nameError").innerHTML = "Please enter a name";
+        }
+
+        //// Validate email
+        //if (email.trim() === "") {
+        //    document.getElementById("emailError").innerHTML = "Please enter an email";
+        //} else {
+        //    var emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+        //    if (!emailRegex.test(email)) {
+        //        document.getElementById("emailError").innerHTML = "Invalid email format";
+        //    }
+        //}
+
+        // Validate phone number
+        if (phoneNumber.trim() === "") {
+            document.getElementById("phoneError").innerHTML = "Please enter a phone number";
+        } else {
+            var phoneRegex = /^\d{10}$/;
+            if (!phoneRegex.test(phoneNumber)) {
+                document.getElementById("phoneError").innerHTML = "Invalid phone number format";
+            }
+        }
+
+        // Validate department name
+        if (deptName.trim() === "") {
+            document.getElementById("deptError").innerHTML = "Please select a department";
+        }
+
+        // Validate gender
+        if (!gender) {
+            document.getElementById("genderError").innerHTML = "Please select a gender";
+        }
+
+        // Return true only if all fields are valid
+        return name.trim() !== "" && email.trim() !== "" && phoneNumber.trim() !== "" && deptName.trim() !== "" && gender;
+    }
+</script>

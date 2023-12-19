@@ -1,0 +1,84 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accept Conditions Form</title>
+    <style>
+        .error-message {
+            color: red;
+        }
+
+        .mandatory-star {
+            color: red;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <form method="post" onsubmit="return validateForm()" style="align-content:center">
+
+        <div class="container" style="width:400px">
+            <center><b style="font-size:30px">CONTACT US</b></center>
+            <br />
+            <div class="form-check">
+                <label>FirstName:<span class="mandatory-star">*</span></label>
+                <input type="text" name="FirstName" class="form-control" required />
+            </div>
+            <div class="form-check">
+                <label>LastName:<span class="mandatory-star">*</span></label>
+                <input type="text" name="LastName" class="form-control" required />
+            </div>
+            <div class="form-check">
+                <label>Email:<span class="mandatory-star">*</span></label>
+                <input type="email" name="Email" class="form-control" required />
+            </div>
+            <div class="form-check">
+                <label>Phone:<span class="mandatory-star">*</span></label>
+                <input type="tel" name="Phone" class="form-control" required />
+            </div>
+            <div class="form-check">
+                <label>Message:<span class="mandatory-star">*</span></label>
+                <input type="text" name="Message" class="form-control" required />
+            </div>
+        </div>
+
+        <center>
+            <div class="form-check" style="align-content:center">
+                <label class="form-check-label" for="acceptConditions">
+                    <input class="form-check-input" type="checkbox" id="acceptConditions" name="acceptConditions">
+
+                    <p>I accept the conditions of the organization</p>
+                </label>
+            </div>
+
+            <div id="error-message" class="error-message"></div>
+
+            <button type="submit">Submit</button>
+        </center>
+    </form>
+
+    <script>
+        function validateForm() {
+            var checkBox = document.getElementById("acceptConditions");
+            var errorMessage = document.getElementById("error-message");
+
+            if (!checkBox.checked) {
+                errorMessage.textContent = "Please accept the conditions of the organization.";
+                return false; // Prevent form submission
+            } else {
+                errorMessage.textContent = "";
+                return true; // Allow form submission
+            }
+        }
+    </script>
+
+</body>
+</html>
+

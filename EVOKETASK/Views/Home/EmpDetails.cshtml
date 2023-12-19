@@ -1,0 +1,62 @@
+﻿@model IEnumerable<EVOKETASK.Models.EmpList>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>EmployeeDetails</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="container" style="font-size:15px">
+        <h3>Employee Details</h3>
+
+        <a asp-controller="Home" asp-action="CreateEmployee" class="btn btn-primary">Create Employee</a><br /><br />
+
+        <div class="row justify-content-center">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>EMAIL</th>
+                        <th>PHONENUMBER</th>
+                        <th>DEPTNAME</th>
+                        <th>GNAME</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(Model != null)
+                    {
+                        @foreach (var employee in Model)
+                        {
+                            <tr>
+                                <td>@employee.ID</td>
+                                <td>@employee.NAME</td>
+                                <td>@employee.EMAIL</td>
+                                <td>@employee.PHONENUMBER</td>
+                                <td>@employee.DEPTNAME</td>
+                                <td>@employee.GNAME</td>
+
+                                <td><a asp-controller="Home" asp-action="EditView" asp-route-id="@employee.ID" class="text-warning">Edit</a></td>
+                                <td><a asp-controller="Home" asp-action="DeleteView" asp-route-id="@employee.ID" class="text-danger">Delete</a></td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @* <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>*@
+
+</body>
+
+</html>
